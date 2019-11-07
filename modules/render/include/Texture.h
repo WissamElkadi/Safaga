@@ -5,32 +5,30 @@
 #include "Mapper.h"
 #include "TextureDescriptor.h"
 
-namespace Platform
+
+namespace Render
 {
-	namespace Render
+	class Texture
 	{
-		class Texture
-		{
-		public:
-			Texture(TextureDescriptor _descriptor);
+	public:
+		Texture(TextureDescriptor _descriptor);
 
-			void replaceRegion(PixelData _withPixelData);
+		void replaceRegion(PixelData _withPixelData);
 
-			void bind();
+		void bind();
 
-			void unbind();
+		void unbind();
 
-			std::string getName();
+		std::string getName();
 
-			int getTextureUnitIndex();
+		int getTextureUnitIndex();
 
-			unsigned int getId();
+		unsigned int getId();
 
-		private:
-			unsigned int      mTextureId;
-			TextureDescriptor mDescriptor;
-			TextureUnit       mTextureUnit;
-			static   int      mTextureUnitProvider;
-		};
-	}
+	private:
+		unsigned int      mTextureId;
+		TextureDescriptor mDescriptor;
+		TextureUnit       mTextureUnit;
+		static   int      mTextureUnitProvider;
+	};
 }

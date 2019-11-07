@@ -5,32 +5,29 @@
 #include "Types.h"
 #include "UniformBuffer.h"
 
-namespace Platform
+namespace Render
 {
-	namespace Render
+	template<typename T>
+	class Uniform : public UniformBuffer
 	{
-		template<typename T>
-		class Uniform : public UniformBuffer
-		{
-		public:
-			Uniform(std::string _name, MemoryFormat _MemoryFormat);
+	public:
+		Uniform(std::string _name, MemoryFormat _MemoryFormat);
 
-			Uniform(std::string _name, MemoryFormat _MemoryFormat, T* _value);
+		Uniform(std::string _name, MemoryFormat _MemoryFormat, T* _value);
 
-			void updateValue(T* _value);
+		void updateValue(T* _value);
 
-			void updateValue(int _programId, const T* _value);
+		void updateValue(int _programId, const T* _value);
 
-			MemoryFormat getMemoryFormat() override;
+		MemoryFormat getMemoryFormat() override;
 
-			void update(int _programId);
-		
-		private:
-			T*          mValue;
-			std::string mName;
-			MemoryFormat mMemoryFormat;
-		};
-	}
+		void update(int _programId);
+
+	private:
+		T*          mValue;
+		std::string mName;
+		MemoryFormat mMemoryFormat;
+	};
 }
 
 #include "Uniform.hpp"

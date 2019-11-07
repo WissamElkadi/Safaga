@@ -4,16 +4,13 @@
 
 namespace Platform
 {
-	namespace System
+	class FileReader
 	{
-		class FileReader
-		{
-		public:
-			static std::string getContent(const char* shaderPath);
+	public:
+		static std::string getContent(const char* shaderPath);
 
-			static unsigned char* loadImageData(const char* imagePath, int& _width, int& _height, int& _nrChannels);
+		static unsigned char* loadImageData(const char* imagePath, int& _width, int& _height, int& _nrChannels);
 
-			static void unloadImageData(unsigned char *_dataBuffer);
-		};
-	}
+		static void unloadImageData(unsigned char *_dataBuffer);
+	};
 }

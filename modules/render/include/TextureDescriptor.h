@@ -3,17 +3,15 @@
 #include "Types.h"
 #include "DataStructure.h"
 
-namespace Platform
+
+namespace Render
 {
-	namespace Render
+	struct TextureDescriptor
 	{
-		struct TextureDescriptor
-		{
-			Region        region;
-			PixelFormat   format;
-			TextureType   type;
-			std::string   name;
-			bool          mipmapped = false;
-		};
-	}
+		Region        region;
+		PixelFormat   format;
+		TextureType   type;
+		std::string   name;
+		bool          mipmapped = false;
+	};
 }

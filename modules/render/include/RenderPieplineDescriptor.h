@@ -8,16 +8,13 @@
 #include "Texture.h"
 #include "Sampler.h"
 
-namespace Platform
+namespace Render
 {
-	namespace Render
+	struct RenderPieplineDescriptor
 	{
-		struct RenderPieplineDescriptor
-		{
-			Shader*   vertexShader{ nullptr };
-			Shader*   fragmentShader{ nullptr };
-			Shader*   geometryShader{ nullptr };
-			std::vector<std::pair<Texture*, Sampler*>> textures;
-		};
-	}
+		Shader*   vertexShader{ nullptr };
+		Shader*   fragmentShader{ nullptr };
+		Shader*   geometryShader{ nullptr };
+		std::vector<std::pair<Texture*, Sampler*>> textures;
+	};
 }

@@ -4,14 +4,13 @@
 
 #include "DataStructure.h"
 
-namespace Platform
+
+namespace Render
 {
-	namespace Render
+	struct VertexDescriptor
 	{
-		struct VertexDescriptor
-		{
-			std::vector<VertexAttribute>     attributes;
-			std::vector<VertexLayout>        layouts;
-		};
-	}
+		std::vector<VertexAttribute>     attributes;
+		std::vector<VertexLayout>        layouts;
+	};
 }
+

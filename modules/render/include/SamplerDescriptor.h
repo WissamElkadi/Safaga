@@ -5,19 +5,17 @@
 #include "DataStructure.h"
 #include "Types.h"
 
-namespace Platform
+
+namespace Render
 {
-	namespace Render
+	struct SamplerDescriptor
 	{
-		struct SamplerDescriptor
-		{
-			TextureType    textureType;
-			TextureFilter  magFilter;
-			TextureFilter  minFilter;
-			TextureWrap    sWrap;
-			TextureWrap    tWrap;
-			TextureWrap    rWrap;
-			Color          borderColor;
-		};
-	}
+		TextureType    textureType;
+		TextureFilter  magFilter;
+		TextureFilter  minFilter;
+		TextureWrap    sWrap;
+		TextureWrap    tWrap;
+		TextureWrap    rWrap;
+		Color          borderColor;
+	};
 }

@@ -7,25 +7,23 @@
 #include "DataStructure.h"
 #include "VertexDescriptor.h"
 
-namespace Platform
+namespace Render
 {
-	namespace Render
+	class VertexBuffer
 	{
-		class VertexBuffer
-		{
-		public:
-			VertexBuffer(VertexDescriptor _descriptor, const std::vector<std::vector<float>>& _verticesList,
-				const std::vector<unsigned int>& _indices = std::vector<unsigned int>());
+	public:
+		VertexBuffer(VertexDescriptor _descriptor, const std::vector<std::vector<float>>& _verticesList,
+			const std::vector<unsigned int>& _indices = std::vector<unsigned int>());
 
-			void bind();
+		void bind();
 
-			void unbind();
+		void unbind();
 
-			~VertexBuffer();
+		~VertexBuffer();
 
-		private:
-			std::vector<unsigned int> mVBO;
-			unsigned int mEBO, mVAO;
-		};
-	}
+	private:
+		std::vector<unsigned int> mVBO;
+		unsigned int mEBO, mVAO;
+	};
 }
+

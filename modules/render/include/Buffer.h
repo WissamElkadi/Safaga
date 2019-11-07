@@ -2,21 +2,19 @@
 
 #include "DataStructure.h"
 
-namespace Platform 
-{ 
-	namespace Render
+namespace Render
+{
+	class Buffer
 	{
-	    class Buffer
-	    {
-	    public:
-	    	Buffer() = delete;
-    
-	    	Buffer(void** _content);
-    
-	    	void* data();
-    
-	    private:
-	    	void* mContent;
-	    };
-    }
+	public:
+		Buffer() = delete;
+
+		Buffer(void** _content);
+
+		void* data();
+
+	private:
+		void* mContent;
+	};
 }
+

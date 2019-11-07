@@ -7,20 +7,17 @@
 #include "DataStructure.h"
 #include "SamplerDescriptor.h"
 
-namespace Platform
+namespace Render
 {
-	namespace Render
+	class Sampler
 	{
-		class Sampler
-		{
-		public:
+	public:
 
-			Sampler(SamplerDescriptor _descriptor);
+		Sampler(SamplerDescriptor _descriptor);
 
-			void bind();
-		
-		private:
-			SamplerDescriptor mSamplerDescriptor;
-		};
-	}
+		void bind();
+
+	private:
+		SamplerDescriptor mSamplerDescriptor;
+	};
 }

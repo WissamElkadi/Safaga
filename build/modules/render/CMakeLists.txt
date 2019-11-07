@@ -13,6 +13,7 @@ set(LIB_SRC
     ${LIB_DIR}/src/Texture.cpp
     ${LIB_DIR}/src/Uniform.hpp
     ${LIB_DIR}/src/VertexBuffer.cpp
+    ${ROOT_DIR}/thirdparty/glad/src/glad.c
 )
 
 # Include Files
@@ -69,6 +70,7 @@ target_include_directories(${TARGET_RENDER_LIB_NAME}
                      ${LIB_DIR}/include
                      ${GLAD_ROOT}/include
                      ${GLM_ROOT}
+                     ${GLFW}/include
                     )
 
 installAndExportLib(${TARGET_RENDER_LIB_NAME})
