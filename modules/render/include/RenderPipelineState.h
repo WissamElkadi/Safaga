@@ -7,30 +7,28 @@
 #include "Texture.h"
 #include "Sampler.h"
 
-namespace Platform
+
+namespace Render
 {
-	namespace Render
+	class RenderPipelineState
 	{
-		class RenderPipelineState
-		{
-		public:
+	public:
 
-			RenderPipelineState(RenderPieplineDescriptor* _renderPieplineDescriptor);
+		RenderPipelineState(std::unique_ptr<RenderPieplineDescriptor>& _renderPieplineDescriptor);
 
-			void link();
+		void link();
 
-			void use();
+		void use();
 
-			void unuse();
+		void unuse();
 
-			int getId();
+		int getId();
 
-		private:
-			int mShaderProgramId;
-			bool mLinked = false;
-			RenderPieplineDescriptor* mRenderPieplineDescriptor;
+	private:
+		int mShaderProgramId;
+		bool mLinked = false;
+		std::unique_ptr<RenderPieplineDescriptor> mRenderPieplineDescriptor;
 
-			void updateTextures();
-		};
-	}
+		void updateTextures();
+	};
 }

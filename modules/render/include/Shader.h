@@ -5,23 +5,22 @@
 #include "Types.h"
 #include "Mapper.h"
 
-namespace Platform
+
+namespace Render
 {
-	namespace Render
+	class Shader
 	{
-		class Shader
-		{
-		public:
-			Shader(const char* _shaderPath, ShaderType _shaderType);
+	public:
+		Shader(const char* _shaderPath, ShaderType _shaderType);
 
-			int getShaderId() const;
+		int getShaderId() const;
 
-			void deleteShader();
+		void deleteShader();
 
-			~Shader();
+		~Shader();
 
-		private:
-			int          mShaderId;
-		};
-	}
+	private:
+		int          mShaderId;
+	};
 }
+

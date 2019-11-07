@@ -15,6 +15,8 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
+find_package(OpenGL REQUIRED)
+
 # Commands like include() and find_package() search for files in directories 
 # listed by this variable before checking the default modules that come with CMake.
 set(CMAKE_MODULE_PATH

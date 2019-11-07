@@ -5,15 +5,14 @@
 #include "RenderPipelineState.h"
 #include "RenderPieplineDescriptor.h"
 
-namespace Platform {
-	namespace Render
+namespace Render
+{
+	class Device
 	{
-		class Device
-		{
-		public:
-			static int getMaxVertexAttributes();
+	public:
+		static int getMaxVertexAttributes();
 
-			static std::unique_ptr<RenderPipelineState> makeRenderPipelineState(RenderPieplineDescriptor* _renderPieplineDescriptor);
-		};
-	}
+		static std::unique_ptr<RenderPipelineState> makeRenderPipelineState(std::unique_ptr<RenderPieplineDescriptor> _renderPieplineDescriptor);
+	};
 }
+
