@@ -19,11 +19,14 @@ namespace Render
 
 		void unbind();
 
+		size_t getIndicesCount();
+
 		~VertexBuffer();
 
 	private:
 		std::vector<unsigned int> mVBO;
 		unsigned int mEBO, mVAO;
+		int mIndicesCount;
 	};
 }
 

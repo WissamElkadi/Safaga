@@ -25,6 +25,7 @@ namespace Render
 
 		if (!_indices.empty())
 		{
+			mIndicesCount = _indices.size();
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mEBO);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, _indices.size() * sizeof(unsigned int), _indices.data(), GL_STATIC_DRAW);
 		}
@@ -64,6 +65,11 @@ namespace Render
 	void VertexBuffer::unbind()
 	{
 		glBindVertexArray(0);
+	}
+
+	size_t VertexBuffer::getIndicesCount()
+	{
+		return mIndicesCount;
 	}
 
 	VertexBuffer::~VertexBuffer()

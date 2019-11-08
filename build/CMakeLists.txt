@@ -11,6 +11,10 @@ message(STATUS "Source tree root: " ${ROOT_DIR})
 # Set output and install locations
 message(STATUS "CMAKE_BINARY_DIR: " ${CMAKE_BINARY_DIR})
 
+# specify the C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -30,7 +34,7 @@ if(NOT SAFAGA_PLATFORM_WINDOWS AND NOT SAFAGA_PLATFORM_ANDROID)
 endif()
 
 # set Options to user
-option(BUILD_APPS "Build Apps" OFF)
+option(BUILD_APPS "Build Apps" ON)
 
 # Include macros and definations
 include(Definations)
