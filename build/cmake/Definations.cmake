@@ -5,6 +5,9 @@ set(GLM_ROOT ${ROOT_DIR}/thirdparty/glm)
 set(STB_IMAGE_ROOT ${ROOT_DIR}/thirdparty/stb_image)
 set(GLFW_ROOT ${ROOT_DIR}/thirdparty/glfw)
 
+#Apps Names
+set(TARGET_RENDER_APP_NAME "Render-App")
+
 # Libs Names
 set(TARGET_PLATFORM_LIB_NAME "Platform")
 set(TARGET_RENDER_LIB_NAME "Render")

@@ -50,11 +50,11 @@ elseif(SAFAGA_PLATFORM_WINDOWS)
     link_directories(${ROOT_DIR}/bin/${SELECTED_PLATFORM}/${TARGET_ARCH}
                 )
 
-    add_library(${TARGET_RENDER_LIB_NAME} SHARED ${LIB_SRC} ${LIB_INC})
+    add_library(${TARGET_RENDER_LIB_NAME} STATIC ${LIB_SRC} ${LIB_INC})
 
-    add_library(PlatformLib SHARED IMPORTED)
-    set_property(TARGET PlatformLib PROPERTY IMPORTED_LOCATION ${TARGET_PLATFORM_LIB_NAME})
-    set_property(TARGET PlatformLib PROPERTY IMPORTED_IMPLIB ${TARGET_PLATFORM_LIB_NAME})
+    # add_library(PlatformLib STATIC IMPORTED)
+    # set_property(TARGET PlatformLib PROPERTY IMPORTED_LOCATION ${TARGET_PLATFORM_LIB_NAME})
+    # set_property(TARGET PlatformLib PROPERTY IMPORTED_IMPLIB ${TARGET_PLATFORM_LIB_NAME})
 
 endif()
 
@@ -70,7 +70,6 @@ target_include_directories(${TARGET_RENDER_LIB_NAME}
                      ${LIB_DIR}/include
                      ${GLAD_ROOT}/include
                      ${GLM_ROOT}
-                     ${GLFW}/include
                     )
 
 installAndExportLib(${TARGET_RENDER_LIB_NAME})

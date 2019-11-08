@@ -2,7 +2,7 @@
 
 namespace Render
 {
-	void Drawer::drawElements(DrawingPrimitive _drawingPrimitive, Type _type, size_t count)
+	void Drawer::drawElements(DrawingPrimitive _drawingPrimitive, Type _type)
 	{
 		glClearColor(mColor.r, mColor.g, mColor.b, mColor.a);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -15,7 +15,7 @@ namespace Render
 			uniformBuffer->update(mRenderPipelineState->getId());
 		}
 
-		glDrawElements(DrawingPrimitiveMapper.at(_drawingPrimitive), count, TypeMapper.at(_type), 0);
+		glDrawElements(DrawingPrimitiveMapper.at(_drawingPrimitive), mVertexBuffer->getIndicesCount(), TypeMapper.at(_type), 0);
 
 		mVertexBuffer->unbind();
 		mRenderPipelineState->unuse();
@@ -32,7 +32,7 @@ namespace Render
 		mRenderPipelineState->link();
 	}
 
-	void Drawer::setUniformBuffers(std::vector<UniformBuffer*>& _uniformBuffers)
+	void Drawer::setUniformBuffers(std::vector<std::shared_ptr<UniformBuffer>>& _uniformBuffers)
 	{
 		mUniformBuffers = _uniformBuffers;
 	}
@@ -50,9 +50,5 @@ namespace Render
 	void Drawer::setVertexBuffer(VertexBuffer* _vertexBuffer)
 	{
 		mVertexBuffer = _vertexBuffer;
-	}
-
-	void Drawer::setIndexBuffer(Buffer* _indexBuffer)
-	{
 	}
 }
