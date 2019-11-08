@@ -4,6 +4,8 @@ namespace Render
 {
 	void RenderPipelineState::updateTextures()
 	{
+		glUseProgram(mShaderProgramId);
+
 		for (const auto& tex : mRenderPieplineDescriptor->textures)
 		{
 			auto texture = tex.first;
@@ -11,8 +13,7 @@ namespace Render
 
 			texture->bind();
 			sampler->bind();
-			int uniformPosition = glGetUniformLocation(mShaderProgramId, texture->getName().c_str());
-
+			GLint uniformPosition = glGetUniformLocation(mShaderProgramId, texture->getName().c_str());
 			glUniform1i(uniformPosition, texture->getTextureUnitIndex());
 		}
 	}
@@ -48,12 +49,13 @@ namespace Render
 
 	void RenderPipelineState::use()
 	{
+		glUseProgram(mShaderProgramId);
+
 		for (const auto& tex : mRenderPieplineDescriptor->textures)
 		{
 			auto texture = tex.first;
 			texture->bind();
 		}
-		glUseProgram(mShaderProgramId);
 	}
 
 
