@@ -5,14 +5,16 @@
 #include "RenderPipelineState.h"
 #include "RenderPieplineDescriptor.h"
 
-namespace Render
+namespace Safaga
 {
-	class Device
+	namespace Render
 	{
-	public:
-		static int getMaxVertexAttributes();
+		class Device
+		{
+		public:
+			static int getMaxVertexAttributes();
 
-		static std::unique_ptr<RenderPipelineState> makeRenderPipelineState(std::unique_ptr<RenderPieplineDescriptor> _renderPieplineDescriptor);
-	};
+			static std::unique_ptr<RenderPipelineState> makeRenderPipelineState(std::unique_ptr<RenderPieplineDescriptor> _renderPieplineDescriptor);
+		};
+	}
 }
-

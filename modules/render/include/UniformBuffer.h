@@ -2,12 +2,15 @@
 
 #include "Types.h"
 
-namespace Render
+namespace Safaga
 {
-	class UniformBuffer
+	namespace Render
 	{
-	public:
-		virtual MemoryFormat getMemoryFormat() = 0;
-		virtual void update(int _shaderProgramId) = 0;
-	};
+		class UniformBuffer
+		{
+		public:
+			virtual MemoryFormat getMemoryFormat() = 0;
+			virtual void update(int _shaderProgramId) = 0;
+		};
+	}
 }

@@ -218,13 +218,40 @@ struct VertexAttribute
 	int          bufferIndex;
 	int          offset;
 	std::string  name;
-	bool         normalized { false };
+	bool         normalized{ false };
 };
 
 struct VertexLayout
 {
 	int stride;
 };
+
+struct ViewPort
+{
+	double originX; // The x coordinate of the upper - left corner of the viewport.
+	double originY; //The y coordinate of the upper - left corner of the viewport.
+	double width;   // The width of the viewport, in pixels.
+	double height;  // The height of the viewport, in pixels.
+	double znear;   // The z coordinate of the near clipping plane of the viewport.
+	double zfar;    // The z coordinate of the far clipping plane of the viewport.
+	ViewPort(double  _originX, double  _originY, double  _width, double  _height, double  _znear = 0.0, double  _zfar= 0.0) :
+		originX(_originX), originY(_originY), width(_width), height(_height), znear(_znear), zfar(_zfar)
+	{
+	};
+};
+
+struct ScissorRect
+{
+	int x;       // The x window coordinate of the upper - left corner of the scissor rectangle.
+	int y;       // The y window coordinate of the upper - left corner of the scissor rectangle.
+	int width;   // The width of the scissor rectangle, in pixels.
+	int height;  // The height of the scissor rectangle, in pixels.
+	ScissorRect(int _x, int _y, int _width, int _height) :
+		x(_x), y(_y), width(_width), height(_height)
+	{
+	}
+};
+
 
 template<MemoryFormat T>
 struct MemoryLayout

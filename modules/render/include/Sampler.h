@@ -7,17 +7,20 @@
 #include "DataStructure.h"
 #include "SamplerDescriptor.h"
 
-namespace Render
+namespace Safaga
 {
-	class Sampler
+	namespace Render
 	{
-	public:
+		class Sampler
+		{
+		public:
 
-		Sampler(SamplerDescriptor _descriptor);
+			Sampler(SamplerDescriptor _descriptor);
 
-		void bind();
+			void bind();
 
-	private:
-		SamplerDescriptor mSamplerDescriptor;
-	};
+		private:
+			SamplerDescriptor mSamplerDescriptor;
+		};
+	}
 }

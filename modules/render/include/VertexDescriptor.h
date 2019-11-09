@@ -4,13 +4,14 @@
 
 #include "DataStructure.h"
 
-
-namespace Render
+namespace Safaga
 {
-	struct VertexDescriptor
+	namespace Render
 	{
-		std::vector<VertexAttribute>     attributes;
-		std::vector<VertexLayout>        layouts;
-	};
+		struct VertexDescriptor
+		{
+			std::vector<VertexAttribute>     attributes;
+			std::vector<VertexLayout>        layouts;
+		};
+	}
 }
-

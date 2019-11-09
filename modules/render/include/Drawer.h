@@ -1,5 +1,7 @@
 #pragma once
 
+#include "DepthDescriptor.h"
+#include "StencilDescriptor.h"
 #include "VertexBuffer.h"
 #include "RenderPipelineState.h"
 #include "UniformBuffer.h"
@@ -8,30 +10,52 @@
 #include "Sampler.h"
 #include "Texture.h"
 
-namespace Render
+namespace Safaga
 {
-	class Drawer
+	namespace Render
 	{
-	public:
-		void drawElements(DrawingPrimitive _drawingPrimitive, Type _type);
+		class Drawer
+		{
+		public:
+			//Draw Commands
+			void drawElements(DrawingPrimitive _drawingPrimitive, Type _type);
+			void draw(DrawingPrimitive _drawingPrimitive);
 
-		void draw(DrawingPrimitive _drawingPrimitive, int count);
+			// set Graphics Rendering Behavior
+			void setClearColor(Color _color);
+			void setRenderPipelineState(RenderPipelineState* _RenderPipelineState);
+			void setFillMode(Face _face, FillMode _fillMode);
+			void setFrontFacingWinding(Winding _winding);
+			void setCullMode(CullMode _cullMode);
 
-		void setRenderPipelineState(RenderPipelineState* _RenderPipelineState);
+			// Depth and Stencil Behavior
+			void setDepthDescriptor(DepthDescriptor _despthDescriptor);
+			void setStencilDescriptor(StencilDescriptor _stencilDescriptor);
 
-		void setUniformBuffers(std::vector<std::shared_ptr<UniformBuffer>>& _uniformBuffers);
+			// Setting Viewport and Scissor Behavior
+			void setViewPort(ViewPort _viewPort);
+			void setViewports(std::vector<ViewPort>& _viewPorts);
+			void setScissorRect(ScissorRect _scissorRect);
+			void setScissorRects(std::vector<ScissorRect>& _scissorRects);
 
-		void setViewPort(int _xOffset, int _yOffset, int _width, int _height);
+			// Setting Blend Behavior
+			void setBlendColor(Color _color);
 
-		void setClearColor(Color _color);
+			//Setting Visibility Behavior
+			void setVisibilityResultMode(VisibilityResultMode _visibilityResultMode, int offset);
 
-		void setVertexBuffer(VertexBuffer* _vertexBuffer);
-
-	private:
-		RenderPipelineState*                          mRenderPipelineState;
-		VertexBuffer*                                 mVertexBuffer;
-		std::vector<std::shared_ptr<UniformBuffer>>   mUniformBuffers;
-		Buffer*                                       mIndexBuffer;
-		Color                                         mColor;
-	};
+			// Setting Buffers
+			void setUniformBuffers(std::vector<std::shared_ptr<UniformBuffer>>& _uniformBuffers);
+			void setVertexBuffer(VertexBuffer* _vertexBuffer);
+			
+		
+		private:
+			RenderPipelineState*                          mRenderPipelineState;
+			VertexBuffer*                                 mVertexBuffer;
+			std::vector<std::shared_ptr<UniformBuffer>>   mUniformBuffers;
+			Buffer*                                       mIndexBuffer;
+			Color                                         mColor;
+			unsigned int                                  mClearBufferBits = 0;
+		};
+	}
 }

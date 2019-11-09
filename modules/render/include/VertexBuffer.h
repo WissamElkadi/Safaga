@@ -7,26 +7,30 @@
 #include "DataStructure.h"
 #include "VertexDescriptor.h"
 
-namespace Render
+namespace Safaga
 {
-	class VertexBuffer
+	namespace Render
 	{
-	public:
-		VertexBuffer(VertexDescriptor _descriptor, const std::vector<std::vector<float>>& _verticesList,
-			const std::vector<unsigned int>& _indices = std::vector<unsigned int>());
+		class VertexBuffer
+		{
+		public:
+			VertexBuffer(VertexDescriptor _descriptor, const std::vector<std::vector<float>>& _verticesList,
+				const std::vector<unsigned int>& _indices = std::vector<unsigned int>());
 
-		void bind();
+			void bind();
 
-		void unbind();
+			void unbind();
 
-		size_t getIndicesCount();
+			size_t getIndicesCount();
+			size_t getVerticesCount();
 
-		~VertexBuffer();
+			~VertexBuffer();
 
-	private:
-		std::vector<unsigned int> mVBO;
-		unsigned int mEBO, mVAO;
-		int mIndicesCount;
-	};
+		private:
+			std::vector<unsigned int> mVBO;
+			unsigned int mEBO, mVAO;
+			int mIndicesCount, mVerticesCount;
+
+		};
+	}
 }
-

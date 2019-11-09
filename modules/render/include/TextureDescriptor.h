@@ -3,15 +3,17 @@
 #include "Types.h"
 #include "DataStructure.h"
 
-
-namespace Render
+namespace Safaga
 {
-	struct TextureDescriptor
+	namespace Render
 	{
-		Region        region;
-		PixelFormat   format;
-		TextureType   type;
-		std::string   name;
-		bool          mipmapped = false;
-	};
+		struct TextureDescriptor
+		{
+			Region        region;
+			PixelFormat   format;
+			TextureType   type;
+			std::string   name;
+			bool          mipmapped = false;
+		};
+	}
 }

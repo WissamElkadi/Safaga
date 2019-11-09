@@ -2,15 +2,18 @@
 
 #include <string>
 
-namespace Platform
+namespace Safaga
 {
-	class FileReader
+	namespace Platform
 	{
-	public:
-		static std::string getContent(const char* shaderPath);
+		class FileReader
+		{
+		public:
+			static std::string getContent(const char* shaderPath);
 
-		static unsigned char* loadImageData(const char* imagePath, int& _width, int& _height, int& _nrChannels);
+			static unsigned char* loadImageData(const char* imagePath, int& _width, int& _height, int& _nrChannels);
 
-		static void unloadImageData(unsigned char *_dataBuffer);
-	};
+			static void unloadImageData(unsigned char *_dataBuffer);
+		};
+	}
 }

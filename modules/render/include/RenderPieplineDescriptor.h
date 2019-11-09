@@ -8,13 +8,16 @@
 #include "Texture.h"
 #include "Sampler.h"
 
-namespace Render
+namespace Safaga
 {
-	struct RenderPieplineDescriptor
+	namespace Render
 	{
-		Shader*   vertexShader{ nullptr };
-		Shader*   fragmentShader{ nullptr };
-		Shader*   geometryShader{ nullptr };
-		std::vector<std::pair<Texture*, Sampler*>> textures;
-	};
+		struct RenderPieplineDescriptor
+		{
+			Shader*   vertexShader{ nullptr };
+			Shader*   fragmentShader{ nullptr };
+			Shader*   geometryShader{ nullptr };
+			std::vector<std::pair<Texture*, Sampler*>> textures;
+		};
+	}
 }

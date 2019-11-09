@@ -5,22 +5,23 @@
 #include "Types.h"
 #include "Mapper.h"
 
-
-namespace Render
+namespace Safaga
 {
-	class Shader
+	namespace Render
 	{
-	public:
-		Shader(const char* _shaderPath, ShaderType _shaderType);
+		class Shader
+		{
+		public:
+			Shader(const char* _shaderPath, ShaderType _shaderType);
 
-		int getShaderId() const;
+			int getShaderId() const;
 
-		void deleteShader();
+			void deleteShader();
 
-		~Shader();
+			~Shader();
 
-	private:
-		int          mShaderId;
-	};
+		private:
+			int          mShaderId;
+		};
+	}
 }
-
