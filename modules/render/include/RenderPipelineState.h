@@ -7,28 +7,30 @@
 #include "Texture.h"
 #include "Sampler.h"
 
-
-namespace Render
+namespace Safaga
 {
-	class RenderPipelineState
+	namespace Render
 	{
-	public:
+		class RenderPipelineState
+		{
+		public:
 
-		RenderPipelineState(std::unique_ptr<RenderPieplineDescriptor>& _renderPieplineDescriptor);
+			RenderPipelineState(std::unique_ptr<RenderPieplineDescriptor>& _renderPieplineDescriptor);
 
-		void link();
+			void link();
 
-		void use();
+			void use();
 
-		void unuse();
+			void unuse();
 
-		int getId();
+			int getId();
 
-	private:
-		int mShaderProgramId;
-		bool mLinked = false;
-		std::unique_ptr<RenderPieplineDescriptor> mRenderPieplineDescriptor;
+		private:
+			int mShaderProgramId;
+			bool mLinked = false;
+			std::unique_ptr<RenderPieplineDescriptor> mRenderPieplineDescriptor;
 
-		void updateTextures();
-	};
+			void updateTextures();
+		};
+	}
 }

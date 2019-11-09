@@ -13,6 +13,7 @@
 #include <Sampler.h>
 
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 class OpenGL
 {
@@ -23,17 +24,23 @@ public:
 	~OpenGL();
 
 private:
-	std::unique_ptr<Render::Texture>                         mTexture1;
-	std::unique_ptr<Render::Texture>                         mTexture2;
-	std::unique_ptr<Render::Sampler>                         mTextureSampler;
-	std::unique_ptr<Render::Shader>                          mVertexShader;
-	std::unique_ptr<Render::Shader>                          mFragmentShader;
-	std::unique_ptr<Render::VertexBuffer>                    mVertexBuffer;
-	std::vector<std::shared_ptr<Render::UniformBuffer>>      mUniformBuffers;
-	std::unique_ptr<Render::RenderPipelineState>             mRenderPipelineState;
-	std::unique_ptr<Render::Drawer>                          mDrawer;
+	std::unique_ptr<Safaga::Render::Texture>                         mTexture1;
+	std::unique_ptr<Safaga::Render::Texture>                         mTexture2;
+	std::unique_ptr<Safaga::Render::Sampler>                         mTextureSampler;
+	std::unique_ptr<Safaga::Render::Shader>                          mVertexShader;
+	std::unique_ptr<Safaga::Render::Shader>                          mFragmentShader;
+	std::unique_ptr<Safaga::Render::VertexBuffer>                    mVertexBuffer;
+	std::vector<std::shared_ptr<Safaga::Render::UniformBuffer>>      mUniformBuffers;
+	std::unique_ptr<Safaga::Render::RenderPipelineState>             mRenderPipelineState;
+	std::unique_ptr<Safaga::Render::Drawer>                          mDrawer;
 
 	GLFWwindow*  mWindow;
+
+
+	// Camera
+	glm::mat4 mModel;
+	glm::mat4 mView;
+	glm::mat4 mProjection;
 
 	void setupSampler();
 	void setupTextures();

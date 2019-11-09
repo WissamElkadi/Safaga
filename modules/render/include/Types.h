@@ -123,3 +123,68 @@ enum class TextureUnit
 	TEXTURE15,
 	TEXTURE16
 };
+
+enum class FillMode
+{
+	POINT,
+	LINE,
+	FILL
+};
+
+enum class Winding
+{
+	CLOCL_WISE,
+	COUNTER_CLOCK_WISE
+};
+
+enum class CullMode
+{
+	NONE,
+	FRONT,
+	BACK
+};
+
+enum class CompareFunction
+{
+	NEVER,         // A new value never passes the comparison test.
+	LESS,          // A new value passes the comparison test if it is less than the existing value.
+	EQUAL,         // A new value passes the comparison test if it is equal to the existing value.
+	LESS_EQUAL,    // A new value passes the comparison test if it is less than or equal to the existing value.
+	GREATER,       // A new value passes the comparison test if it is greater than the existing value.
+	NOT_EQUAL,     // A new value passes the comparison test if it is not equal to the existing value.
+	GREATER_EQUAL, // A new value passes the comparison test if it is greater than or equal to the existing value.
+	ALWAYS         // A new value always passes the comparison test.
+};
+
+enum class VisibilityResultMode
+{
+	DISABLED, // Does not monitor the samples that pass the depth and stencil tests.
+	BOOLEAN,  // Indicates whether samples pass the depth and stencil tests.
+	COUNTING  // Counts the samples that pass the depth and stencil tests.
+};
+
+enum class StencilOperation
+{
+	KEEP,            // Keep the current stencil value.
+	ZERO,            // Set the stencil value to zero.
+	REPLACE,         // Replace the stencil value with the stencil reference value,
+	INCREMENT,       // Increase the stencil value by 1 if it is lower than the maximum value.
+	DECREMENT,       // Decrease the stencil value by 1 if it is higher than the minimum value.
+	INCREMENT_WRAP,  // Same as INCREMENT, but wraps it back to 0 as soon as the maximum value is exceeded.
+	DECREMENT_WRAP,  // Same as DECREMENT, but wraps it to the maximum value if it ends up lower than 0.
+	INVERT           // Bitwise inverts the current stencil buffer value.
+};
+
+enum class FrameBufferType
+{
+	DEPTH_BUFFER,
+	STENCIL_BUFFER,
+	COLOR_BUFFER
+};
+
+enum class Face
+{
+	FRONT,
+	BACK,
+	FRONT_BACK
+};

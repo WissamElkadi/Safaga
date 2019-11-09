@@ -1,17 +1,20 @@
 #include "Device.h"
 
-namespace Render
+namespace Safaga
 {
-	int Device::getMaxVertexAttributes()
+	namespace Render
 	{
-		int maxVertexAttributes;
-		glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &maxVertexAttributes);
-		return maxVertexAttributes;
-	}
+		int Device::getMaxVertexAttributes()
+		{
+			int maxVertexAttributes;
+			glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &maxVertexAttributes);
+			return maxVertexAttributes;
+		}
 
-	std::unique_ptr<RenderPipelineState> Device::makeRenderPipelineState(std::unique_ptr<RenderPieplineDescriptor> _renderPieplineDescriptor)
-	{
-		std::unique_ptr<RenderPipelineState> state = std::make_unique<RenderPipelineState>(_renderPieplineDescriptor);
-		return std::move(state);
+		std::unique_ptr<RenderPipelineState> Device::makeRenderPipelineState(std::unique_ptr<RenderPieplineDescriptor> _renderPieplineDescriptor)
+		{
+			std::unique_ptr<RenderPipelineState> state = std::make_unique<RenderPipelineState>(_renderPieplineDescriptor);
+			return std::move(state);
+		}
 	}
 }

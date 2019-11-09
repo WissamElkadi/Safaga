@@ -2,19 +2,22 @@
 
 #include "DataStructure.h"
 
-namespace Render
+namespace Safaga
 {
-	class Buffer
+	namespace Render
 	{
-	public:
-		Buffer() = delete;
+		class Buffer
+		{
+		public:
+			Buffer() = delete;
 
-		Buffer(void** _content);
+			Buffer(void** _content);
 
-		void* data();
+			void* data();
 
-	private:
-		void* mContent;
-	};
+		private:
+			void* mContent;
+		};
+	}
 }
 

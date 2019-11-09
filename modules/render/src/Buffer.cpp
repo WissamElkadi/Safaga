@@ -1,16 +1,19 @@
 #include "Buffer.h"
 
-namespace Render
+namespace Safaga
 {
-
-	Buffer::Buffer(void** _content)
+	namespace Render
 	{
-		mContent = *_content;
-	}
 
-	void* Buffer::data()
-	{
-		return mContent;
-	}
+		Buffer::Buffer(void** _content)
+		{
+			mContent = *_content;
+		}
 
+		void* Buffer::data()
+		{
+			return mContent;
+		}
+
+	}
 }
