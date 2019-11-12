@@ -6,39 +6,30 @@ namespace Safaga
 	{
 		void Drawer::drawElements(DrawingPrimitive _drawingPrimitive, Type _type)
 		{
-			glClearColor(mColor.r, mColor.g, mColor.b, mColor.a);
-
-			glClear(mClearBufferBits);
-
-			mRenderPipelineState->use();
-			mVertexBuffer->bind();
-
-			for (const auto& uniformBuffer : mUniformBuffers)
-			{
-				uniformBuffer->update(mRenderPipelineState->getId());
-			}
-
 			glDrawElements(DrawingPrimitiveMapper.at(_drawingPrimitive), mVertexBuffer->getIndicesCount(), TypeMapper.at(_type), 0);
-
-			mVertexBuffer->unbind();
-			mRenderPipelineState->unuse();
 		}
 
-		void Drawer::draw(DrawingPrimitive _drawingPrimitive)
+		void Drawer::begin()
 		{
 			glClearColor(mColor.r, mColor.g, mColor.b, mColor.a);
 			glClear(mClearBufferBits);
 
 			mRenderPipelineState->use();
 			mVertexBuffer->bind();
+		}
 
+		void Drawer::draw(DrawingPrimitive _drawingPrimitive)
+		{
 			for (const auto& uniformBuffer : mUniformBuffers)
 			{
 				uniformBuffer->update(mRenderPipelineState->getId());
 			}
 
 			glDrawArrays(DrawingPrimitiveMapper.at(_drawingPrimitive), 0, mVertexBuffer->getVerticesCount());
+		}
 
+		void Drawer::end()
+		{
 			mVertexBuffer->unbind();
 			mRenderPipelineState->unuse();
 		}

@@ -20,6 +20,7 @@ set(LIB_SRC
 set(LIB_INC
     ${LIB_DIR}/include/Buffer.h
     ${LIB_DIR}/include/DataStructure.h
+    ${LIB_DIR}/include/DepthDescriptor.h
     ${LIB_DIR}/include/Device.h
     ${LIB_DIR}/include/Drawer.h
     ${LIB_DIR}/include/Mapper.h
@@ -28,6 +29,7 @@ set(LIB_INC
     ${LIB_DIR}/include/Sampler.h
     ${LIB_DIR}/include/SamplerDescriptor.h
     ${LIB_DIR}/include/Shader.h
+    ${LIB_DIR}/include/StencilDescriptor.h
     ${LIB_DIR}/include/Texture.h
     ${LIB_DIR}/include/TextureDescriptor.h
     ${LIB_DIR}/include/Types.h

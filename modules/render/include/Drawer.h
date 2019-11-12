@@ -19,7 +19,10 @@ namespace Safaga
 		public:
 			//Draw Commands
 			void drawElements(DrawingPrimitive _drawingPrimitive, Type _type);
+
+			void begin();
 			void draw(DrawingPrimitive _drawingPrimitive);
+			void end();
 
 			// set Graphics Rendering Behavior
 			void setClearColor(Color _color);

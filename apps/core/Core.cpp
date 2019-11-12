@@ -1,4 +1,4 @@
-#include "OpenGL.h"
+#include "Core.h"
 
 #include <FileReader.h>
 
@@ -10,19 +10,66 @@
 unsigned int SCR_WIDTH = 600;
 unsigned int SCR_HEIGHT = 800;
 
+// Camera
+std::unique_ptr<Safaga::Core::Camera>   camera;
+
+// callback
+bool  firstMouse = true;
+float lastX;
+float lastY;
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	SCR_WIDTH = width; SCR_HEIGHT = height;
 	glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 }
 
-void processInput(GLFWwindow *window)
+void mouseCallback(GLFWwindow*, double _xPos, double _yPos)
 {
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, true);
+	if (firstMouse)
+	{
+		lastX = _xPos;
+		lastY = _yPos;
+		firstMouse = false;
+	}
+
+	float xoffset = _xPos - lastX;
+	float yoffset = lastY - _yPos; // reversed since y-coordinates go from bottom to top
+
+	lastX = _xPos;
+	lastY = _yPos;
+
+	camera->ProcessMouseMovement(xoffset, yoffset);
 }
 
-void OpenGL::setupSampler()
+// glfw: whenever the mouse scroll wheel scrolls, this callback is called
+// ----------------------------------------------------------------------
+void scrollCallback(GLFWwindow*, double _xOffset, double _yOffset)
+{
+	camera->ProcessMouseScroll(_yOffset);
+}
+
+void Core::processInput()
+{
+	if (glfwGetKey(mWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(mWindow, true);
+
+	if (glfwGetKey(mWindow, GLFW_KEY_W) == GLFW_PRESS)
+		camera->ProcessKeyboard(FORWARD, mDeltaTime);
+	if (glfwGetKey(mWindow, GLFW_KEY_S) == GLFW_PRESS)
+		camera->ProcessKeyboard(BACKWARD, mDeltaTime);
+	if (glfwGetKey(mWindow, GLFW_KEY_A) == GLFW_PRESS)
+		camera->ProcessKeyboard(LEFT, mDeltaTime);
+	if (glfwGetKey(mWindow, GLFW_KEY_D) == GLFW_PRESS)
+		camera->ProcessKeyboard(RIGHT, mDeltaTime);
+}
+
+void Core::setupCamera()
+{
+	camera = std::make_unique<Safaga::Core::Camera>(glm::vec3(0.0f, 0.0f, 3.0f));
+}
+
+void Core::setupSampler()
 {
 	/// SAMPLER
 	Safaga::Render::SamplerDescriptor samplerDescriptor;
@@ -35,7 +82,7 @@ void OpenGL::setupSampler()
 	mTextureSampler = std::make_unique<Safaga::Render::Sampler>(samplerDescriptor);
 }
 
-void OpenGL::setupTextures()
+void Core::setupTextures()
 {
 	/// TEXTURE 1
 	int width, height, channel;
@@ -73,20 +120,20 @@ void OpenGL::setupTextures()
 	Safaga::Platform::FileReader::unloadImageData(imageDataBuffer);
 }
 
-void OpenGL::setupUniformBuffers()
+void Core::setupUniformBuffers()
 {
 	// Color Uniform
 	Color color = { 0.f, 1.0f, 0.0f, 1.0f };
 	std::shared_ptr<Safaga::Render::UniformBuffer> colorUniformBuffer = std::make_shared<Safaga::Render::Uniform<float>>("ourColor", MemoryFormat::FLOAT4, color.data());
 
 	// Transformation Unifrom
-	mModel = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
-	mView = glm::mat4(1.0f);
-	mProjection = glm::mat4(1.0f);
+	auto model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
+	auto view = camera->getViewMatrix();
+	auto projection = glm::mat4(1.0f);
 
-	std::shared_ptr<Safaga::Render::UniformBuffer> modelUniformBuffer = std::make_shared<Safaga::Render::Uniform<float>>("model", MemoryFormat::MAT_FLOAT_4X4, glm::value_ptr(mModel));
-	std::shared_ptr<Safaga::Render::UniformBuffer> viewUniformBuffer = std::make_shared<Safaga::Render::Uniform<float>>("view", MemoryFormat::MAT_FLOAT_4X4, glm::value_ptr(mView));
-	std::shared_ptr<Safaga::Render::UniformBuffer> projectionUniformBuffer = std::make_shared<Safaga::Render::Uniform<float>>("projection", MemoryFormat::MAT_FLOAT_4X4, glm::value_ptr(mProjection));
+	std::shared_ptr<Safaga::Render::UniformBuffer> modelUniformBuffer = std::make_shared<Safaga::Render::Uniform<float>>("model", MemoryFormat::MAT_FLOAT_4X4, glm::value_ptr(model));
+	std::shared_ptr<Safaga::Render::UniformBuffer> viewUniformBuffer = std::make_shared<Safaga::Render::Uniform<float>>("view", MemoryFormat::MAT_FLOAT_4X4, glm::value_ptr(view));
+	std::shared_ptr<Safaga::Render::UniformBuffer> projectionUniformBuffer = std::make_shared<Safaga::Render::Uniform<float>>("projection", MemoryFormat::MAT_FLOAT_4X4, glm::value_ptr(projection));
 
 	//mUniformBuffers.push_back(colorUniformBuffer);
 	mUniformBuffers.push_back(modelUniformBuffer);
@@ -94,8 +141,21 @@ void OpenGL::setupUniformBuffers()
 	mUniformBuffers.push_back(projectionUniformBuffer);
 }
 
-void OpenGL::setupVertexBuffer()
+void Core::setupVertexBuffer()
 {
+	mCubesPosition = {
+		glm::vec3(0.0f,  0.0f,  0.0f),
+		glm::vec3(2.0f,  5.0f, -15.0f),
+		glm::vec3(-1.5f, -2.2f, -2.5f),
+		glm::vec3(-3.8f, -2.0f, -12.3f),
+		glm::vec3(2.4f, -0.4f, -3.5f),
+		glm::vec3(-1.7f,  3.0f, -7.5f),
+		glm::vec3(1.3f, -2.0f, -2.5f),
+		glm::vec3(1.5f,  2.0f, -2.5f),
+		glm::vec3(1.5f,  0.2f, -1.5f),
+		glm::vec3(-1.3f,  1.0f, -1.5f)
+	};
+
 	//std::vector<unsigned int> indices = {  // note that we start from 0!
 	//0, 1, 3,  // first Triangle
 	//1, 2, 3   // second Triangle
@@ -166,7 +226,7 @@ void OpenGL::setupVertexBuffer()
 	mVertexBuffer = std::make_unique<Safaga::Render::VertexBuffer>(vertexDescriptor, verticesList);
 }
 
-void OpenGL::setupRenderPipeline()
+void Core::setupRenderPipeline()
 {
 	mVertexShader = std::make_unique<Safaga::Render::Shader>("C:/Users/mohammew/Documents/Wissam/Safaga/apps/render/res/triangle.ver.glsl", ShaderType::VERTEX);
 	mFragmentShader = std::make_unique<Safaga::Render::Shader>("C:/Users/mohammew/Documents/Wissam/Safaga/apps/render/res/triangle.frag.glsl", ShaderType::FRAGMENT);
@@ -181,7 +241,7 @@ void OpenGL::setupRenderPipeline()
 	mRenderPipelineState = std::make_unique<Safaga::Render::RenderPipelineState>(renderPieplineDescriptor);
 }
 
-void OpenGL::setupDrawer()
+void Core::setupDrawer()
 {
 	mDrawer = std::make_unique<Safaga::Render::Drawer>();
 	mDrawer->setViewPort(ViewPort(0, 0, SCR_HEIGHT, SCR_WIDTH));
@@ -192,28 +252,37 @@ void OpenGL::setupDrawer()
 	mDrawer->setDepthDescriptor(Safaga::Render::DepthDescriptor(true, CompareFunction::LESS));
 }
 
-OpenGL::OpenGL()
+Core::Core()
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	mWindow = glfwCreateWindow(SCR_HEIGHT, SCR_WIDTH, "OpenGL", NULL, NULL);
+	mWindow = glfwCreateWindow(SCR_HEIGHT, SCR_WIDTH, "Core", NULL, NULL);
 	if (mWindow == NULL)
 	{
 		glfwTerminate();
 		throw std::exception("Failed to create GLFW window");
 	}
 	glfwMakeContextCurrent(mWindow);
+	glfwSetFramebufferSizeCallback(mWindow, framebuffer_size_callback);
+
+	glfwSetCursorPosCallback(mWindow, mouseCallback);
+	glfwSetScrollCallback(mWindow, scrollCallback);
+
+	// tell GLFW to capture our mouse
+	glfwSetInputMode(mWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
 		throw std::exception("Failed to initialize GLAD");
 	}
 
-	glfwSetFramebufferSizeCallback(mWindow, framebuffer_size_callback);
+	lastX = SCR_WIDTH / 2.0f;
+	lastY = SCR_HEIGHT / 2.0f;
 
+	setupCamera();
 	setupSampler();
 	setupTextures();
 	setupUniformBuffers();
@@ -222,33 +291,38 @@ OpenGL::OpenGL()
 	setupDrawer();
 }
 
-void OpenGL::draw()
+void Core::draw()
 {
 	std::vector<float> red = { 1.0f, 0.0f, 0.0f, 1.0f };
 
 	while (!glfwWindowShouldClose(mWindow))
 	{
-		processInput(mWindow);
+		float currentFrame = glfwGetTime();
+		mDeltaTime = currentFrame - mLastFrame;
+		mLastFrame = currentFrame;
+
+		processInput();
 
 		//dynamic_cast<Safaga::Render::Uniform<float>*>(mUniformBuffers.at(0).get())->updateValue(red.data());
 
-		mModel = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
-		mView = glm::mat4(1.0f);
-		mProjection = glm::mat4(1.0f);
+		glm::mat4 view = camera->getViewMatrix();
+		glm::mat4 projection = camera->getProjectionMatrix(SCR_WIDTH, SCR_HEIGHT);
 
-		mModel = glm::rotate(mModel, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
-		mView = glm::translate(mView, glm::vec3(0.0f, 0.0f, -3.0f));
-		mProjection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+		dynamic_cast<Safaga::Render::Uniform<float>*>(mUniformBuffers.at(1).get())->updateValue(glm::value_ptr(view));
+		dynamic_cast<Safaga::Render::Uniform<float>*>(mUniformBuffers.at(2).get())->updateValue(glm::value_ptr(projection));
 
-		// draw our first triangle
 		mDrawer->begin();
+		for (unsigned int i = 0; i < mCubesPosition.size(); i++)
+		{
+			// calculate the model matrix for each object and pass it to shader before drawing
+			glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
+			model = glm::translate(model, mCubesPosition[i]);
+			float angle = 20.0f * i;
+			model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+			dynamic_cast<Safaga::Render::Uniform<float>*>(mUniformBuffers.at(0).get())->updateValue(glm::value_ptr(model));
 
-		dynamic_cast<Safaga::Render::Uniform<float>*>(mUniformBuffers.at(0).get())->updateValue(glm::value_ptr(mModel));
-		dynamic_cast<Safaga::Render::Uniform<float>*>(mUniformBuffers.at(1).get())->updateValue(glm::value_ptr(mView));
-		dynamic_cast<Safaga::Render::Uniform<float>*>(mUniformBuffers.at(2).get())->updateValue(glm::value_ptr(mProjection));
-
-		mDrawer->draw(DrawingPrimitive::TRIANGLES);
-
+			mDrawer->draw(DrawingPrimitive::TRIANGLES);
+		}
 		mDrawer->end();
 
 		glfwSwapBuffers(mWindow);
@@ -256,7 +330,7 @@ void OpenGL::draw()
 	}
 }
 
-OpenGL::~OpenGL()
+Core::~Core()
 {
 	glfwTerminate();
 }
