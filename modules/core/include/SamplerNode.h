@@ -1,21 +1,21 @@
 #pragma once
 
 #include "Node.h"
-#include "MathUtils.h"
+
+#include <Sampler.h>
 
 namespace Safaga
 {
 	namespace Core
 	{
-		class Transform : public Node
+		class SamplerNode : public Node
 		{
 		public:
-			Transform(MathUtils::mat4& _matrix);
+			SamplerNode(Render::SamplerDescriptor _descriptor);
 			void accept(INodeVisitor& _nodeVisitor) override;
-			MathUtils::mat4 getMatrix();
 
 		private:
-			MathUtils::mat4 mMatrix;
+			std::unique_ptr<Render::Sampler>   mSampler;
 		};
 	}
 }

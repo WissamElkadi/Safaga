@@ -98,7 +98,7 @@ else
     else
         if [ $taregtOS = 'windows' ]; then
             if [ $targetArch = 'all' ]; then
-                targetArchArray=('Win64')
+                targetArchArray=('win64')
             else
                 targetArchArray=($targetArch)
             fi

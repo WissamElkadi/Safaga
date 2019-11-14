@@ -10,8 +10,8 @@ namespace Safaga
 		{
 		public:
 			Mesh(std::vector<float>& _vertices, std::vector<unsigned int>& _indcies);
-			float* getVertices();
-			unsigned int* getIndcies();
+			std::vector<float> getVertices();
+			std::vector<unsigned int> getIndcies();
 
 		private:
 			std::vector<float>        mVertices;

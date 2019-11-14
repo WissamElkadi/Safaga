@@ -1,10 +1,10 @@
-#include "Switch.h"
+#include "SwitchNode.h"
 
 namespace Safaga
 {
 	namespace Core
 	{
-		void Switch::accept(INodeVisitor& _nodeVisitor)
+		void SwitchNode::accept(INodeVisitor& _nodeVisitor)
 		{
 			_nodeVisitor.visit(*this);
 		}

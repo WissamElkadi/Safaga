@@ -7,7 +7,7 @@ namespace Safaga
 	namespace Core
 	{
 		DirectionalLight::DirectionalLight(MathUtils::vec3 _position, MathUtils::vec3 _direction, MathUtils::vec3 _color) :
-			Light(_position, _color), mDirection(_direction)
+			LightNode(_position, _color), mDirection(_direction)
 		{
 		}
 

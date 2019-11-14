@@ -1,15 +1,15 @@
-#include "Group.h"
+#include "GroupNode.h"
 
 namespace Safaga
 {
 	namespace Core
 	{
-		void Group::accept(INodeVisitor& _nodeVisitor)
+		void GroupNode::accept(INodeVisitor& _nodeVisitor)
 		{
 			traverse(_nodeVisitor);
 		}
 
-		void Group::traverse(INodeVisitor& _nodeVisitor)
+		void GroupNode::traverse(INodeVisitor& _nodeVisitor)
 		{
 			for (auto & child : mChildren)
 			{
@@ -17,7 +17,7 @@ namespace Safaga
 			}
 		}
 
-		bool Group::contains(std::shared_ptr<Node> _node) const
+		bool GroupNode::contains(std::shared_ptr<Node> _node) const
 		{
 			for (const auto& child : mChildren)
 			{
@@ -29,7 +29,7 @@ namespace Safaga
 			return false;
 		}
 
-		bool Group::addChild(std::shared_ptr<Node> _childNode)
+		bool GroupNode::addChild(std::shared_ptr<Node> _childNode)
 		{
 			if (!_childNode) return false;
 
@@ -44,7 +44,7 @@ namespace Safaga
 			return true;
 		}
 
-		bool Group::insertChild(size_t _index, std::shared_ptr<Node> _childNode)
+		bool GroupNode::insertChild(size_t _index, std::shared_ptr<Node> _childNode)
 		{
 			if (!_childNode) return false;
 
@@ -60,7 +60,7 @@ namespace Safaga
 			return true;
 		}
 
-		bool Group::removeChild(std::shared_ptr<Node> _childNode)
+		bool GroupNode::removeChild(std::shared_ptr<Node> _childNode)
 		{
 			auto index = getChildIndex(_childNode);
 			if (index == -1)
@@ -73,7 +73,7 @@ namespace Safaga
 			return true;
 		}
 
-		bool Group::replaceChild(std::shared_ptr<Node> _originalNode, std::shared_ptr<Node> _newChild)
+		bool GroupNode::replaceChild(std::shared_ptr<Node> _originalNode, std::shared_ptr<Node> _newChild)
 		{
 			if (_newChild == nullptr || _originalNode == _newChild)
 			{
@@ -97,7 +97,7 @@ namespace Safaga
 			return false;
 		}
 
-		std::shared_ptr<Node> Group::getChild(size_t _index)
+		std::shared_ptr<Node> GroupNode::getChild(size_t _index)
 		{
 			if (_index < 0 || _index >= mChildren.size())
 			{
@@ -107,7 +107,7 @@ namespace Safaga
 			return mChildren[_index];
 		}
 
-		size_t Group::getChildIndex(std::shared_ptr<Node> _childNode) const
+		size_t GroupNode::getChildIndex(std::shared_ptr<Node> _childNode) const
 		{
 			for (size_t i = 0; i < mChildren.size(); ++i)
 			{

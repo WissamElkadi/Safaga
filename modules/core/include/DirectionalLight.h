@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Light.h"
+#include "LightNode.h"
 
 namespace Safaga
 {
 	namespace Core
 	{
-		class DirectionalLight : public Light
+		class DirectionalLight : public LightNode
 		{
 		public:
 			DirectionalLight(MathUtils::vec3 _position, MathUtils::vec3 _direction, MathUtils::vec3 _color = MathUtils::vec3(1.0f));

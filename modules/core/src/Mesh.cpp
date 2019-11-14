@@ -9,14 +9,14 @@ namespace Safaga
 		{
 		}
 
-		float* Mesh::getVertices()
+		std::vector<float> Mesh::getVertices()
 		{
-			return mVertices.data();
+			return mVertices;
 		}
 
-		unsigned int* Mesh::getIndcies()
+		std::vector<unsigned int> Mesh::getIndcies()
 		{
-			return mIndcies.data();
+			return mIndcies;
 		}
 	}
 }

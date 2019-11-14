@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Light.h"
+#include "LightNode.h"
 
 namespace Safaga
 {
 	namespace Core
 	{
-		class PointLight : public Light
+		class PointLight : public LightNode
 		{
 		public:
 			void accept(INodeVisitor& _nodeVisitor) override;

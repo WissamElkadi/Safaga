@@ -6,13 +6,13 @@ namespace Safaga
 {
 	namespace Core
 	{
-		class Group : public Node
+		class GroupNode : public Node
 		{
 		public:
 			void accept(INodeVisitor& _nodeVisitor) override;
 			void traverse(INodeVisitor& _nodeVisitor) override;
 
-			// Group Child List Operation
+			// GroupNode Child List Operation
 			bool contains(std::shared_ptr<Node> _node) const;
 			bool addChild(std::shared_ptr<Node> _childNode);
 			bool insertChild(size_t _index, std::shared_ptr<Node> _childNode);

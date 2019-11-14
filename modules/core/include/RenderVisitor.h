@@ -9,11 +9,19 @@ namespace Safaga
 		class RenderVisitor : public INodeVisitor
 		{
 		public:
-			void visit(Renderable& node)    override;
-			void visit(CameraNode& node)    override;
-			void visit(Light&  node)        override;
-			void visit(Transform& node)     override;
-			void visit(Switch& node)        override;
+			RenderVisitor(int _screenWidth, int _screenSize);
+
+			void visit(Renderable& node)        override;
+			void visit(TextureNode& node)       override;
+			void visit(SamplerNode& node)       override;
+			void visit(ShaderNode& node)        override;
+			void visit(CameraNode& node)        override;
+			void visit(LightNode&  node)        override;
+			void visit(TransformNode& node)     override;
+			void visit(SwitchNode& node)        override;
+
+		private:
+			int mScreenWidth, mScreenHeight;
 		};
 	}
 }

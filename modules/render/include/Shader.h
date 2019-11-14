@@ -12,7 +12,7 @@ namespace Safaga
 		class Shader
 		{
 		public:
-			Shader(const char* _shaderPath, ShaderType _shaderType);
+			Shader(const char* _shaderSource, ShaderType _shaderType);
 
 			int getShaderId() const;
 

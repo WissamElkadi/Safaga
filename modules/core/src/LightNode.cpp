@@ -1,10 +1,10 @@
-#include "Light.h"
+#include "LightNode.h"
 
 namespace Safaga
 {
 	namespace Core
 	{
-		Light::Light(MathUtils::vec3 _position, MathUtils::vec3 _color) :
+		LightNode::LightNode(MathUtils::vec3 _position, MathUtils::vec3 _color) :
 			mPosition(_position), mColor(_color)
 		{
 		}

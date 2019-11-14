@@ -7,19 +7,25 @@ namespace Safaga
 	namespace Core
 	{
 		class Renderable;
+		class TextureNode;
+		class SamplerNode;
+		class ShaderNode;
 		class CameraNode;
-		class Light;
-		class Transform;
-		class Switch;
+		class LightNode;
+		class TransformNode;
+		class SwitchNode;
 
 		class INodeVisitor
 		{
 		public:
 			virtual void visit(Renderable& node) = 0;
+			virtual void visit(TextureNode& node) = 0;
+			virtual void visit(SamplerNode& node) = 0;
+			virtual void visit(ShaderNode& node) = 0;
 			virtual void visit(CameraNode& node) = 0;
-			virtual void visit(Light&  node) = 0;
-			virtual void visit(Transform& node) = 0;
-			virtual void visit(Switch& node) = 0;
+			virtual void visit(LightNode&  node) = 0;
+			virtual void visit(TransformNode& node) = 0;
+			virtual void visit(SwitchNode& node) = 0;
 		};
 	}
 }

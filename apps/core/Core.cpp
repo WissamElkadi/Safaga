@@ -228,8 +228,11 @@ void Core::setupVertexBuffer()
 
 void Core::setupRenderPipeline()
 {
-	mVertexShader = std::make_unique<Safaga::Render::Shader>("C:/Users/mohammew/Documents/Wissam/Safaga/apps/render/res/triangle.ver.glsl", ShaderType::VERTEX);
-	mFragmentShader = std::make_unique<Safaga::Render::Shader>("C:/Users/mohammew/Documents/Wissam/Safaga/apps/render/res/triangle.frag.glsl", ShaderType::FRAGMENT);
+	std::string vertexShaderSourceString = Safaga::Platform::FileReader::getContent("C:/Users/mohammew/Documents/Wissam/Safaga/apps/render/res/triangle.ver.glsl");
+	std::string fragmentShaderSourceString = Safaga::Platform::FileReader::getContent("C:/Users/mohammew/Documents/Wissam/Safaga/apps/render/res/triangle.frag.glsl");
+
+	mVertexShader = std::make_unique<Safaga::Render::Shader>(vertexShaderSourceString.c_str(), ShaderType::VERTEX);
+	mFragmentShader = std::make_unique<Safaga::Render::Shader>(fragmentShaderSourceString.c_str(), ShaderType::FRAGMENT);
 
 	std::unique_ptr<Safaga::Render::RenderPieplineDescriptor> renderPieplineDescriptor = std::make_unique<Safaga::Render::RenderPieplineDescriptor>();
 	renderPieplineDescriptor->vertexShader = mVertexShader.get();

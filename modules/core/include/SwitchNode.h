@@ -6,7 +6,7 @@ namespace Safaga
 {
 	namespace Core
 	{
-		class Switch : public Node
+		class SwitchNode : public Node
 		{
 		public:
 			void accept(INodeVisitor& _nodeVisitor) override;

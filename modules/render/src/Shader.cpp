@@ -1,17 +1,13 @@
 #include "Shader.h"
 
 #include <glad/glad.h>
-#include <FileReader.h>
 
 namespace Safaga
 {
 	namespace Render
 	{
-		Shader::Shader(const char* _shaderPath, ShaderType _shaderType)
+		Shader::Shader(const char* shaderSource, ShaderType _shaderType)
 		{
-			std::string shaderSourceString = Platform::FileReader::getContent(_shaderPath);
-			const char* shaderSource = shaderSourceString.c_str();
-
 			mShaderId = glCreateShader(ShaderTypeMapper.at(_shaderType));
 			glShaderSource(mShaderId, 1, &shaderSource, NULL);
 			glCompileShader(mShaderId);

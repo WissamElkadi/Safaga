@@ -8,17 +8,20 @@ set(LIB_SRC
     ${LIB_DIR}/src/Camera.cpp
     ${LIB_DIR}/src/CameraNode.cpp
     ${LIB_DIR}/src/DirectionalLight.cpp
-    ${LIB_DIR}/src/Group.cpp
-    ${LIB_DIR}/src/Light.cpp
-    ${LIB_DIR}/src/Material.cpp
+    ${LIB_DIR}/src/GroupNode.cpp
+    ${LIB_DIR}/src/LightNode.cpp
+    ${LIB_DIR}/src/MaterialNode.cpp
     ${LIB_DIR}/src/Mesh.cpp
     ${LIB_DIR}/src/Node.cpp
     ${LIB_DIR}/src/PointLight.cpp
     ${LIB_DIR}/src/Renderable.cpp
     ${LIB_DIR}/src/RenderVisitor.cpp
+    ${LIB_DIR}/src/SamplerNode.cpp
+    ${LIB_DIR}/src/ShaderNode.cpp
     ${LIB_DIR}/src/SpotLight.cpp
-    ${LIB_DIR}/src/Switch.cpp
-    ${LIB_DIR}/src/Transform.cpp
+    ${LIB_DIR}/src/SwitchNode.cpp
+    ${LIB_DIR}/src/TextureNode.cpp
+    ${LIB_DIR}/src/TransformNode.cpp
 )
 
 # Include Files
@@ -27,19 +30,22 @@ set(LIB_INC
     ${LIB_DIR}/include/Camera.h
     ${LIB_DIR}/include/CameraNode.h
     ${LIB_DIR}/include/DirectionalLight.h
-    ${LIB_DIR}/include/Group.h
+    ${LIB_DIR}/include/GroupNode.h
     ${LIB_DIR}/include/INodeVisitor.h
-    ${LIB_DIR}/include/Light.h
-    ${LIB_DIR}/include/Material.h
+    ${LIB_DIR}/include/LightNode.h
+    ${LIB_DIR}/include/MaterialNode.h
     ${LIB_DIR}/include/MathUtils.h
     ${LIB_DIR}/include/Mesh.h
     ${LIB_DIR}/include/Node.h
     ${LIB_DIR}/include/PointLight.h
     ${LIB_DIR}/include/Renderable.h
     ${LIB_DIR}/include/RenderVisitor.h
+    ${LIB_DIR}/include/SamplerNode.h
+    ${LIB_DIR}/include/ShaderNode.h
     ${LIB_DIR}/include/SpotLight.h
-    ${LIB_DIR}/include/Switch.h
-    ${LIB_DIR}/include/Transform.h
+    ${LIB_DIR}/include/SwitchNode.h
+    ${LIB_DIR}/include/TextureNode.h
+    ${LIB_DIR}/include/TransformNode.h
 )
 
 # Source files grouping in IDE
