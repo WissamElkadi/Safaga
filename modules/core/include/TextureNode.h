@@ -27,7 +27,7 @@ namespace Safaga
 			uint32_t    mHeight;
 			uint8_t     mChannel;
 
-			std::unique_ptr<Render::Texture> mTexture;
+			std::shared_ptr<Render::Texture> mTexture;
 
 			void setupTexture(unsigned char* _buffer);
 		};

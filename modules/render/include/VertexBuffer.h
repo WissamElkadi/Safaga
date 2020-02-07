@@ -14,9 +14,6 @@ namespace Safaga
 		class VertexBuffer
 		{
 		public:
-			VertexBuffer(VertexDescriptor _descriptor, const std::vector<std::vector<float>>& _verticesList,
-				const std::vector<unsigned int>& _indices = std::vector<unsigned int>());
-
 			void bind();
 
 			void unbind();
@@ -31,6 +28,11 @@ namespace Safaga
 			unsigned int mEBO, mVAO;
 			int mIndicesCount, mVerticesCount;
 
+			VertexBuffer(VertexDescriptor& _descriptor, const std::vector<std::vector<float>>& _verticesList,
+				const std::vector<unsigned int>& _indices = std::vector<unsigned int>());
+
+			friend class Device;
+			friend class std::_Ref_count_obj<VertexBuffer>;
 		};
 	}
 }

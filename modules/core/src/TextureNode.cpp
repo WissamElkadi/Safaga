@@ -2,6 +2,8 @@
 
 #include <TextureDescriptor.h>
 
+#include <Device.h>
+
 namespace Safaga
 {
 	namespace Core
@@ -27,7 +29,7 @@ namespace Safaga
 			descriptor.region = Region::regionMake2D(0, 0, mWidth, mHeight);
 			descriptor.name = mName;
 
-			mTexture = std::make_unique<Render::Texture>(descriptor);
+			mTexture = Render::Device::make_shared<Render::Texture>(descriptor);
 
 			PixelData pixelData1(_buffer, mChannel == 4 ? PixelFormat::RGBA : PixelFormat::RGB, DataType::UNSIGNED_BYTE);
 			mTexture->replaceRegion(pixelData1);

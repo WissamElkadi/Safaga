@@ -7,6 +7,8 @@
 
 #include <DepthDescriptor.h>
 
+#include <Device.h>
+
 unsigned int SCR_WIDTH = 600;
 unsigned int SCR_HEIGHT = 800;
 
@@ -79,7 +81,7 @@ void Core::setupSampler()
 	samplerDescriptor.magFilter = TextureFilter::LINEAR;
 	samplerDescriptor.minFilter = TextureFilter::LINEAR;
 
-	mTextureSampler = std::make_unique<Safaga::Render::Sampler>(samplerDescriptor);
+	mTextureSampler = Safaga::Render::Device::make_shared< Safaga::Render::Sampler>(samplerDescriptor);
 }
 
 void Core::setupTextures()
@@ -95,7 +97,7 @@ void Core::setupTextures()
 	textureDecriptor1.region = Region::regionMake2D(0, 0, width, height);
 	textureDecriptor1.name = "texture1";
 
-	mTexture1 = std::make_unique<Safaga::Render::Texture>(textureDecriptor1);
+	mTexture1 = Safaga::Render::Device::make_shared< Safaga::Render::Texture>(textureDecriptor1);
 
 	PixelData pixelData1(imageDataBuffer, channel == 4 ? PixelFormat::RGBA : PixelFormat::RGB, DataType::UNSIGNED_BYTE);
 	mTexture1->replaceRegion(pixelData1);
@@ -112,7 +114,7 @@ void Core::setupTextures()
 	textureDecriptor2.region = Region::regionMake2D(0, 0, width, height);
 	textureDecriptor2.name = "texture2";
 
-	mTexture2 = std::make_unique<Safaga::Render::Texture>(textureDecriptor2);
+	mTexture2 = Safaga::Render::Device::make_shared< Safaga::Render::Texture>(textureDecriptor2);
 
 	PixelData pixelData2(imageDataBuffer, channel == 4 ? PixelFormat::RGBA : PixelFormat::RGB, DataType::UNSIGNED_BYTE);
 	mTexture2->replaceRegion(pixelData2);
@@ -223,7 +225,7 @@ void Core::setupVertexBuffer()
 
 	std::vector<std::vector<float>>verticesList;
 	verticesList.push_back(vertices);
-	mVertexBuffer = std::make_unique<Safaga::Render::VertexBuffer>(vertexDescriptor, verticesList);
+	mVertexBuffer = Safaga::Render::Device::make_shared< Safaga::Render::VertexBuffer>(vertexDescriptor, verticesList);
 }
 
 void Core::setupRenderPipeline()
@@ -231,17 +233,17 @@ void Core::setupRenderPipeline()
 	std::string vertexShaderSourceString = Safaga::Platform::FileReader::getContent("C:/Users/mohammew/Documents/Wissam/Safaga/apps/render/res/triangle.ver.glsl");
 	std::string fragmentShaderSourceString = Safaga::Platform::FileReader::getContent("C:/Users/mohammew/Documents/Wissam/Safaga/apps/render/res/triangle.frag.glsl");
 
-	mVertexShader = std::make_unique<Safaga::Render::Shader>(vertexShaderSourceString.c_str(), ShaderType::VERTEX);
-	mFragmentShader = std::make_unique<Safaga::Render::Shader>(fragmentShaderSourceString.c_str(), ShaderType::FRAGMENT);
+	mVertexShader = std::make_shared<Safaga::Render::Shader>(vertexShaderSourceString.c_str(), ShaderType::VERTEX);
+	mFragmentShader = std::make_shared<Safaga::Render::Shader>(fragmentShaderSourceString.c_str(), ShaderType::FRAGMENT);
 
-	std::unique_ptr<Safaga::Render::RenderPieplineDescriptor> renderPieplineDescriptor = std::make_unique<Safaga::Render::RenderPieplineDescriptor>();
-	renderPieplineDescriptor->vertexShader = mVertexShader.get();
-	renderPieplineDescriptor->fragmentShader = mFragmentShader.get();
-	renderPieplineDescriptor->textures = { { mTexture1.get() , mTextureSampler.get()},
+	Safaga::Render::RenderPieplineDescriptor renderPieplineDescriptor;
+	renderPieplineDescriptor.vertexShader = mVertexShader.get();
+	renderPieplineDescriptor.fragmentShader = mFragmentShader.get();
+	renderPieplineDescriptor.textures = { { mTexture1.get() , mTextureSampler.get()},
 										   { mTexture2.get() , mTextureSampler.get()}
 	};
 
-	mRenderPipelineState = std::make_unique<Safaga::Render::RenderPipelineState>(renderPieplineDescriptor);
+	mRenderPipelineState = Safaga::Render::Device::make_shared< Safaga::Render::RenderPipelineState>(renderPieplineDescriptor);
 }
 
 void Core::setupDrawer()
@@ -249,8 +251,8 @@ void Core::setupDrawer()
 	mDrawer = std::make_unique<Safaga::Render::Drawer>();
 	mDrawer->setViewPort(ViewPort(0, 0, SCR_HEIGHT, SCR_WIDTH));
 	mDrawer->setClearColor(Color(0.2f, 0.3f, 0.3f, 1.0f));
-	mDrawer->setVertexBuffer(mVertexBuffer.get());
-	mDrawer->setRenderPipelineState(mRenderPipelineState.get());
+	mDrawer->setVertexBuffer(mVertexBuffer);
+	mDrawer->setRenderPipelineState(mRenderPipelineState);
 	mDrawer->setUniformBuffers(mUniformBuffers);
 	mDrawer->setDepthDescriptor(Safaga::Render::DepthDescriptor(true, CompareFunction::LESS));
 }

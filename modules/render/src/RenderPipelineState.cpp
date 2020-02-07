@@ -8,7 +8,7 @@ namespace Safaga
 		{
 			glUseProgram(mShaderProgramId);
 
-			for (const auto& tex : mRenderPieplineDescriptor->textures)
+			for (const auto& tex : mRenderPieplineDescriptor.textures)
 			{
 				auto texture = tex.first;
 				auto sampler = tex.second;
@@ -20,20 +20,20 @@ namespace Safaga
 			}
 		}
 
-		RenderPipelineState::RenderPipelineState(std::unique_ptr<RenderPieplineDescriptor>& _renderPieplineDescriptor)
+		RenderPipelineState::RenderPipelineState(RenderPieplineDescriptor& _renderPieplineDescriptor)
 		{
-			mRenderPieplineDescriptor = std::move(_renderPieplineDescriptor);
+			mRenderPieplineDescriptor = _renderPieplineDescriptor;
 		}
 
 		void RenderPipelineState::link()
 		{
 			mShaderProgramId = glCreateProgram();
 
-			glAttachShader(mShaderProgramId, mRenderPieplineDescriptor->vertexShader->getShaderId());
-			glAttachShader(mShaderProgramId, mRenderPieplineDescriptor->fragmentShader->getShaderId());
+			glAttachShader(mShaderProgramId, mRenderPieplineDescriptor.vertexShader->getShaderId());
+			glAttachShader(mShaderProgramId, mRenderPieplineDescriptor.fragmentShader->getShaderId());
 
-			if (mRenderPieplineDescriptor->geometryShader)
-				glAttachShader(mShaderProgramId, mRenderPieplineDescriptor->geometryShader->getShaderId());
+			if (mRenderPieplineDescriptor.geometryShader)
+				glAttachShader(mShaderProgramId, mRenderPieplineDescriptor.geometryShader->getShaderId());
 
 			glLinkProgram(mShaderProgramId);
 
@@ -53,7 +53,7 @@ namespace Safaga
 		{
 			glUseProgram(mShaderProgramId);
 
-			for (const auto& tex : mRenderPieplineDescriptor->textures)
+			for (const auto& tex : mRenderPieplineDescriptor.textures)
 			{
 				auto texture = tex.first;
 				texture->bind();

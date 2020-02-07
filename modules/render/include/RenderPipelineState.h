@@ -14,9 +14,6 @@ namespace Safaga
 		class RenderPipelineState
 		{
 		public:
-
-			RenderPipelineState(std::unique_ptr<RenderPieplineDescriptor>& _renderPieplineDescriptor);
-
 			void link();
 
 			void use();
@@ -28,9 +25,13 @@ namespace Safaga
 		private:
 			int mShaderProgramId;
 			bool mLinked = false;
-			std::unique_ptr<RenderPieplineDescriptor> mRenderPieplineDescriptor;
+			RenderPieplineDescriptor mRenderPieplineDescriptor;
 
+			RenderPipelineState(RenderPieplineDescriptor& _renderPieplineDescriptor);
 			void updateTextures();
+
+			friend class Device;
+			friend class std::_Ref_count_obj<RenderPipelineState>;
 		};
 	}
 }

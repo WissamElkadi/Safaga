@@ -1,4 +1,5 @@
 #include "SamplerNode.h"
+#include <Device.h>
 
 namespace Safaga
 {
@@ -6,7 +7,7 @@ namespace Safaga
 	{
 		SamplerNode::SamplerNode(Render::SamplerDescriptor _descriptor)
 		{
-			mSampler = std::make_unique<Render::Sampler>(_descriptor);
+			mSampler = Render::Device::make_shared<Render::Sampler>(_descriptor);
 		}
 
 		void SamplerNode::accept(INodeVisitor& _nodeVisitor)

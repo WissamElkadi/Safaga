@@ -17,7 +17,7 @@ namespace Safaga
 
 			void addParent(std::shared_ptr<Node> _parentNode);
 
-			//virtual ~Node() = 0;
+			virtual ~Node() = 0;
 		private:
 			std::vector<std::weak_ptr<Node>> mParents;
 		};

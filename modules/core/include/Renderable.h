@@ -17,10 +17,10 @@ namespace Safaga
 
 		private:
 			std::unique_ptr<Mesh>                                  mMesh;
-			std::unique_ptr<Render::VertexBuffer>                  mVertexBuffer;
-			std::vector<std::unique_ptr<Render::Texture>>          mTextures;
-			std::unique_ptr<Render::Sampler>                       mNearestSampler;
-			std::unique_ptr<Render::Sampler>                       mLinearSampler;
+			std::shared_ptr<Render::VertexBuffer>                  mVertexBuffer;
+			std::vector<std::shared_ptr<Render::Texture>>          mTextures;
+			std::shared_ptr<Render::Sampler>                       mNearestSampler;
+			std::shared_ptr<Render::Sampler>                       mLinearSampler;
 
 			void setupVertexBuffer();
 			void setupSampler();

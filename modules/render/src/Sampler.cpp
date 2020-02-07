@@ -7,7 +7,7 @@ namespace Safaga
 	namespace Render
 	{
 
-		Sampler::Sampler(SamplerDescriptor _descriptor)
+		Sampler::Sampler(SamplerDescriptor& _descriptor)
 		{
 			mSamplerDescriptor = _descriptor;
 		}

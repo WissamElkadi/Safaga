@@ -6,18 +6,20 @@ namespace Safaga
 {
 	namespace Render
 	{
+		class Device;
+
 		class Buffer
 		{
 		public:
-			Buffer() = delete;
-
-			Buffer(void** _content);
-
 			void* data();
 
 		private:
 			void* mContent;
+
+			Buffer() = default;
+			Buffer(void** _content);
+
+			friend class Device;
 		};
 	}
 }
-

@@ -188,3 +188,19 @@ enum class Face
 	BACK,
 	FRONT_BACK
 };
+
+
+// at the start of the rendering pass
+enum class LoadAction
+{
+	DONT_CARE,
+	LOAD,
+	CLEAR
+};
+
+// at the end of the rendeering pass
+enum class StoreAction
+{
+	DONT_CARE,
+	STORE
+};

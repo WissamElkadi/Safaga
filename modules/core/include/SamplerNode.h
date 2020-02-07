@@ -15,7 +15,7 @@ namespace Safaga
 			void accept(INodeVisitor& _nodeVisitor) override;
 
 		private:
-			std::unique_ptr<Render::Sampler>   mSampler;
+			std::shared_ptr<Render::Sampler>   mSampler;
 		};
 	}
 }

@@ -24,14 +24,14 @@ public:
 	~OpenGL();
 
 private:
-	std::unique_ptr<Safaga::Render::Texture>                         mTexture1;
-	std::unique_ptr<Safaga::Render::Texture>                         mTexture2;
-	std::unique_ptr<Safaga::Render::Sampler>                         mTextureSampler;
-	std::unique_ptr<Safaga::Render::Shader>                          mVertexShader;
-	std::unique_ptr<Safaga::Render::Shader>                          mFragmentShader;
-	std::unique_ptr<Safaga::Render::VertexBuffer>                    mVertexBuffer;
+	std::shared_ptr<Safaga::Render::Texture>                         mTexture1;
+	std::shared_ptr<Safaga::Render::Texture>                         mTexture2;
+	std::shared_ptr<Safaga::Render::Sampler>                         mTextureSampler;
+	std::shared_ptr<Safaga::Render::Shader>                          mVertexShader;
+	std::shared_ptr<Safaga::Render::Shader>                          mFragmentShader;
+	std::shared_ptr<Safaga::Render::VertexBuffer>                    mVertexBuffer;
 	std::vector<std::shared_ptr<Safaga::Render::UniformBuffer>>      mUniformBuffers;
-	std::unique_ptr<Safaga::Render::RenderPipelineState>             mRenderPipelineState;
+	std::shared_ptr<Safaga::Render::RenderPipelineState>             mRenderPipelineState;
 	std::unique_ptr<Safaga::Render::Drawer>                          mDrawer;
 
 	GLFWwindow*  mWindow;

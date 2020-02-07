@@ -12,7 +12,7 @@ namespace Safaga
 	{
 		int Texture::mTextureUnitProvider = 0;
 
-		Texture::Texture(TextureDescriptor _descriptor)
+		Texture::Texture(TextureDescriptor& _descriptor)
 		{
 			mDescriptor = _descriptor;
 

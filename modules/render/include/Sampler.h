@@ -14,13 +14,15 @@ namespace Safaga
 		class Sampler
 		{
 		public:
-
-			Sampler(SamplerDescriptor _descriptor);
-
 			void bind();
 
 		private:
 			SamplerDescriptor mSamplerDescriptor;
+
+			Sampler(SamplerDescriptor& _descriptor);
+
+			friend class Device;
+			friend class std::_Ref_count_obj<Sampler>;
 		};
 	}
 }

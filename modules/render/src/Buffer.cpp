@@ -4,7 +4,6 @@ namespace Safaga
 {
 	namespace Render
 	{
-
 		Buffer::Buffer(void** _content)
 		{
 			mContent = *_content;
@@ -14,6 +13,5 @@ namespace Safaga
 		{
 			return mContent;
 		}
-
 	}
 }

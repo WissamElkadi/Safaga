@@ -1,5 +1,6 @@
 #pragma once
 
+#include "RenderPassDescriptor.h"
 #include "DepthDescriptor.h"
 #include "StencilDescriptor.h"
 #include "VertexBuffer.h"
@@ -14,15 +15,16 @@ namespace Safaga
 {
 	namespace Render
 	{
-		class Drawer
+		class RenderCommandEncoder
 		{
 		public:
+			RenderCommandEncoder(RenderPassDescriptor& _renderPassDescriptor);
 			//Draw Commands
 			void drawElements(DrawingPrimitive _drawingPrimitive, Type _type);
 
 			void begin();
 			void draw(DrawingPrimitive _drawingPrimitive);
-			void end();
+			void endEncoding();
 
 			// set Graphics Rendering Behavior
 			void setClearColor(Color _color);
@@ -45,20 +47,22 @@ namespace Safaga
 			void setBlendColor(Color _color);
 
 			//Setting Visibility Behavior
-			void setVisibilityResultMode(VisibilityResultMode _visibilityResultMode, int offset);
+			void setVisibilityResultMode(VisibilityResultMode _visibilityResultMode, int _offset);
 
 			// Setting Buffers
 			void setUniformBuffers(std::vector<std::shared_ptr<UniformBuffer>>& _uniformBuffers);
 			void setVertexBuffer(std::shared_ptr<VertexBuffer> _vertexBuffer);
-			
-		
+
+
 		private:
+			RenderPassDescriptor                          mRenderPassDescriptor;
 			std::shared_ptr<RenderPipelineState>          mRenderPipelineState;
 			std::shared_ptr<VertexBuffer>                 mVertexBuffer;
 			std::vector<std::shared_ptr<UniformBuffer>>   mUniformBuffers;
 			Buffer*                                       mIndexBuffer;
 			Color                                         mColor;
-			unsigned int                                  mClearBufferBits = 0;
+			unsigned int                                  mClearBufferBits = 0;			
 		};
 	}
 }
+

@@ -1,4 +1,5 @@
 #include "Renderable.h"
+#include "Device.h"
 
 namespace Safaga
 {
@@ -31,7 +32,7 @@ namespace Safaga
 
 			std::vector<std::vector<float>>verticesList;
 			verticesList.push_back(mMesh->getVertices());
-			mVertexBuffer = std::make_unique<Render::VertexBuffer>(vertexDescriptor, verticesList, mMesh->getIndcies());
+			mVertexBuffer = Render::Device::make_shared<Render::VertexBuffer>(vertexDescriptor, verticesList, mMesh->getIndcies());
 		}
 	}
 }

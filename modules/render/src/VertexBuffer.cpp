@@ -8,7 +8,7 @@ namespace Safaga
 {
 	namespace Render
 	{
-		VertexBuffer::VertexBuffer(VertexDescriptor _descriptor, const std::vector<std::vector<float>>& _verticesList, const std::vector<unsigned int>& _indices)
+		VertexBuffer::VertexBuffer(VertexDescriptor& _descriptor, const std::vector<std::vector<float>>& _verticesList, const std::vector<unsigned int>& _indices)
 		{
 			glGenVertexArrays(1, &mVAO);
 			mVBO.resize(_verticesList.size());

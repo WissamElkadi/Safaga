@@ -12,8 +12,6 @@ namespace Safaga
 		class Texture
 		{
 		public:
-			Texture(TextureDescriptor _descriptor);
-
 			void replaceRegion(PixelData _withPixelData);
 
 			void bind();
@@ -27,10 +25,15 @@ namespace Safaga
 			unsigned int getId();
 
 		private:
+			Texture(TextureDescriptor& _descriptor);
+
 			unsigned int      mTextureId;
 			TextureDescriptor mDescriptor;
 			TextureUnit       mTextureUnit;
 			static   int      mTextureUnitProvider;
+
+			friend class Device;
+			friend class std::_Ref_count_obj<Texture>;
 		};
 	}
 }
